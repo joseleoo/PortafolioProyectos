@@ -23,6 +23,7 @@ namespace PortafolioProyectos.Models
 
         [EmailAddress(ErrorMessage = "Email incorrecto" )]
         [Display(Name = "Correo Electrónico")]
+        [StringLength(100, ErrorMessage ="Solo se permiten 100 caracteres")]
         public string Email { get; set; }
     }
 }

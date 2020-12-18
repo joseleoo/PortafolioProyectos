@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortafolioProyectos.Context;
 
 namespace PortafolioProyectos.Migrations
 {
     [DbContext(typeof(PortafolioDbContext))]
-    partial class PortafolioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201218031528_clientes3")]
+    partial class clientes3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
