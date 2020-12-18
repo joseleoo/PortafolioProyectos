@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortafolioProyectos.Context;
 
 namespace PortafolioProyectos.Migrations
 {
     [DbContext(typeof(PortafolioDbContext))]
-    partial class PortafolioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201218025901_clientes")]
+    partial class clientes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,22 +27,19 @@ namespace PortafolioProyectos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                    b.Property<int>("Apellido")
+                        .HasColumnType("int")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Email")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                    b.Property<int>("Nombre")
+                        .HasColumnType("int")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
+                    b.Property<int>("Telefono")
+                        .HasColumnType("int")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");

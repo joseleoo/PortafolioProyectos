@@ -7,5 +7,7 @@ namespace PortafolioProyectos.Models
 {
     public class LenguajesPorProyecto
     {
+        public int LenguajeId { get; set; }
+        
     }
 }

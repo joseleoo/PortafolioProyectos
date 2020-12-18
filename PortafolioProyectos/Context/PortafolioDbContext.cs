@@ -14,5 +14,6 @@ namespace PortafolioProyectos.Context
 
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Lenguaje> Lenguajes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }
