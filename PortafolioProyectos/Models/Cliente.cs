@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PortafolioProyectos.Models
 {
@@ -25,5 +26,7 @@ namespace PortafolioProyectos.Models
         [Display(Name = "Correo Electrónico")]
         [StringLength(100, ErrorMessage ="Solo se permiten 100 caracteres")]
         public string Email { get; set; }
+
+        public List<Proyecto> Proyectos { get; set; }
     }
 }
