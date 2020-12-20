@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(p => p.Cliente)
-                @Html.DropDownListFor(p => p.Cliente, (IEnumerable<SelectListItem>)ViewBag.ClienteId, "Seleccione", new { @class = "form-control" })
+                @Html.DropDownListFor(p => p.Cliente, new SelectList(ViewBag.ClienteId, "Id", "Apellido"), "Seleccione", new { @class = "form-control" })
                 @Html.ValidationMessageFor(p => p.Cliente,"Cliente requerido")
             </div>
             <div class="form-group">

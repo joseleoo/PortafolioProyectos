@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PortafolioProyectos.Models
 {
@@ -17,7 +18,8 @@ namespace PortafolioProyectos.Models
         [Required(ErrorMessage = "Cliente requerido")]
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
-        //public IEnumerable<Cliente> Clientes { get; set; }
+        [NotMapped]
+        public IEnumerable<Cliente> Clientes { get; set; }
 
         [Display(Name = "Fecha de inicio")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

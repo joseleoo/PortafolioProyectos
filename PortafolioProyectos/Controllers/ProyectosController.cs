@@ -49,14 +49,14 @@ namespace PortafolioProyectos.Controllers
 
         // GET: Proyectos/Create
         public IActionResult Create()
-        {
-            //var cliente =  _context.Clientes.AsEnumerable();
-            //Proyecto proyecto = new Proyecto();
-            //proyecto.Clientes = cliente;
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
+        { 
+
+            //ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
+            ViewData["ClienteId"] = _context.Clientes;
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion");
             ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion");
             return View();
+
         }
 
         // POST: Proyectos/Create

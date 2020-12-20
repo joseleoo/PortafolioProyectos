@@ -2,14 +2,18 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/PortafolioProyectos",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:63175",
+      "applicationUrl": "http://localhost:63175/proyectos",
       "sslPort": 44309
     }
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "Project",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
