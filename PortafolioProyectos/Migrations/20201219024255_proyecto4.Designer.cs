@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortafolioProyectos.Context;
 
 namespace PortafolioProyectos.Migrations
 {
     [DbContext(typeof(PortafolioDbContext))]
-    partial class PortafolioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201219024255_proyecto4")]
+    partial class proyecto4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,21 +94,6 @@ namespace PortafolioProyectos.Migrations
                     b.ToTable("Lenguajes");
                 });
 
-            modelBuilder.Entity("PortafolioProyectos.Models.LenguajesPorProyecto", b =>
-                {
-                    b.Property<int>("LenguajeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProyectoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LenguajeId", "ProyectoId");
-
-                    b.HasIndex("ProyectoId");
-
-                    b.ToTable("LenguajesPorProyectos");
-                });
-
             modelBuilder.Entity("PortafolioProyectos.Models.Proyecto", b =>
                 {
                     b.Property<int>("Id")
@@ -156,21 +143,6 @@ namespace PortafolioProyectos.Migrations
                     b.HasOne("PortafolioProyectos.Models.Proyecto", null)
                         .WithMany("Lenguajes")
                         .HasForeignKey("ProyectoId");
-                });
-
-            modelBuilder.Entity("PortafolioProyectos.Models.LenguajesPorProyecto", b =>
-                {
-                    b.HasOne("PortafolioProyectos.Models.Lenguaje", "Lenguaje")
-                        .WithMany()
-                        .HasForeignKey("LenguajeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PortafolioProyectos.Models.Proyecto", "Proyecto")
-                        .WithMany()
-                        .HasForeignKey("ProyectoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("PortafolioProyectos.Models.Proyecto", b =>

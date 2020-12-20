@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PortafolioProyectos.Models
 {
@@ -13,5 +10,6 @@ namespace PortafolioProyectos.Models
         public string Descripcion { get; set; }
         [StringLength(1)]
         public char Nivel { get; set; }
+
     }
 }
