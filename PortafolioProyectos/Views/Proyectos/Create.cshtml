@@ -18,9 +18,9 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.LabelFor(p => p.Cliente)
-                @Html.DropDownListFor(p => p.Cliente, new SelectList(ViewBag.ClienteId, "Id", "Apellido"), "Seleccione", new { @class = "form-control" })
-                @Html.ValidationMessageFor(p => p.Cliente,"Cliente requerido")
+                @Html.LabelFor(p => p.ClienteId)
+                @Html.DropDownListFor(p => p.ClienteId, (IEnumerable<SelectListItem>)ViewBag.ClienteId, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.ClienteId,"", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label asp-for="FechaInicio" class="control-label"></label>
@@ -43,17 +43,18 @@
                 <span asp-validation-for="Horas" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EstadoId" class="control-label"></label>
-                <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId"></select>
-                @*@Html.DropDownListFor(p => p.Estado, (IEnumerable<SelectListItem>)ViewBag.EstadoId, "Seleccione", new { @class = "form-control" })*@
-                @*@Html.ValidationMessageFor(p => p.Estado)*@
+                @*<label asp-for="EstadoId" class="control-label"></label>
+                <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId"></select>*@
+                @Html.LabelFor(p => p.EstadoId)
+                @Html.DropDownListFor(p => p.EstadoId, (IEnumerable<SelectListItem>)ViewBag.EstadoId, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.EstadoId, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <label asp-for="LenguajeId" class="control-label"></label>
-                @*@Html.LabelFor(p=>p.Lenguaje)*@
-                @*@Html.DropDownListFor(p => p.Lenguaje, (IEnumerable<SelectListItem>)ViewBag.LenguajeId, "Seleccione", new { @class = "form-control" })*@
-                @*@Html.ValidationMessageFor(p=>p.Lenguaje)*@
-                <select asp-for="LenguajeId" class="form-control" asp-items="ViewBag.LenguajeId"></select>
+                @*<label asp-for="LenguajeId" class="control-label"></label>
+                <select asp-for="LenguajeId" class="form-control" asp-items="ViewBag.LenguajeId"></select>*@
+                @Html.LabelFor(p => p.LenguajeId)
+                @Html.DropDownListFor(p => p.LenguajeId, (IEnumerable<SelectListItem>)ViewBag.LenguajeId, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.LenguajeId, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -26,6 +26,37 @@ namespace PortafolioProyectos.Controllers
             return View(await portafolioDbContext.ToListAsync());
         }
 
+        // GET: Proyectos/Create
+        public IActionResult Create()
+        {
+            //ViewData["ClienteId"] = _context.Clientes;
+            //ViewData["EstadoId"] = _context.Estados;
+            //ViewData["LenguajeId"] = _context.Lenguajes;
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
+            ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion");
+            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion");
+            return View();
+        }
+
+        // POST: Proyectos/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,ClienteId,FechaInicio,FechaFin,Precio,Horas,EstadoId,LenguajeId")] Proyecto proyecto)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(proyecto);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", proyecto.ClienteId);
+            ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", proyecto.EstadoId);
+            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion", proyecto.LenguajeId);
+            return View(proyecto);
+        }
+
         // GET: Proyectos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,37 +75,6 @@ namespace PortafolioProyectos.Controllers
                 return NotFound();
             }
 
-            return View(proyecto);
-        }
-
-        // GET: Proyectos/Create
-        public IActionResult Create()
-        { 
-
-            //ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
-            ViewData["ClienteId"] = _context.Clientes;
-            ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion");
-            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion");
-            return View();
-
-        }
-
-        // POST: Proyectos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion,ClienteId,FechaInicio,FechaFin,Precio,Horas,EstadoId,LenguajeId")] Proyecto proyecto)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(proyecto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", proyecto.ClienteId);
-            ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Id", proyecto.EstadoId);
-            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Id", proyecto.LenguajeId);
             return View(proyecto);
         }
 
