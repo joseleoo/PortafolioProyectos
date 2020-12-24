@@ -5,11 +5,15 @@ namespace PortafolioProyectos.Models
 {
     public class Lenguaje
     {
+
         public int Id { get; set; }
         [StringLength(100)]
         public string Descripcion { get; set; }
+
         [StringLength(1)]
         public char Nivel { get; set; }
+
+
 
     }
 }

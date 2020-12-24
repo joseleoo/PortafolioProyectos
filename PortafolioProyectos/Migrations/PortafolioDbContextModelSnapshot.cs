@@ -92,21 +92,6 @@ namespace PortafolioProyectos.Migrations
                     b.ToTable("Lenguajes");
                 });
 
-            modelBuilder.Entity("PortafolioProyectos.Models.LenguajesPorProyecto", b =>
-                {
-                    b.Property<int>("LenguajeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProyectoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LenguajeId", "ProyectoId");
-
-                    b.HasIndex("ProyectoId");
-
-                    b.ToTable("LenguajesPorProyectos");
-                });
-
             modelBuilder.Entity("PortafolioProyectos.Models.Proyecto", b =>
                 {
                     b.Property<int>("Id")
@@ -156,21 +141,6 @@ namespace PortafolioProyectos.Migrations
                     b.HasOne("PortafolioProyectos.Models.Proyecto", null)
                         .WithMany("Lenguajes")
                         .HasForeignKey("ProyectoId");
-                });
-
-            modelBuilder.Entity("PortafolioProyectos.Models.LenguajesPorProyecto", b =>
-                {
-                    b.HasOne("PortafolioProyectos.Models.Lenguaje", "Lenguaje")
-                        .WithMany()
-                        .HasForeignKey("LenguajeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PortafolioProyectos.Models.Proyecto", "Proyecto")
-                        .WithMany()
-                        .HasForeignKey("ProyectoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("PortafolioProyectos.Models.Proyecto", b =>

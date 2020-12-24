@@ -22,8 +22,8 @@ namespace PortafolioProyectos.Context
         {
             modelBuilder.Entity<LenguajesPorProyecto>()
                 .HasKey(lp => new { lp.LenguajeId, lp.ProyectoId });
-          
-    
+
+
         }
     }
 }

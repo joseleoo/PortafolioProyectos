@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PortafolioProyectos.Models
 {
-    public class Proyecto : IValidatableObject
+    public class Proyecto 
     {
         public int Id { get; set; }
         [Display(Name = "Descripción"),Required(ErrorMessage = "Descripción requerida"),StringLength(100)]
@@ -35,29 +35,13 @@ namespace PortafolioProyectos.Models
         [Required(ErrorMessage = "Estado requerido"), Display(Name = "Estado")]
         public int EstadoId { get; set; }
         public Estado Estado { get; set; }
-        
-        [Required(ErrorMessage = "Lenguaje requerido"), Display(Name = "Estado")]
-        public int LenguajeId { get; set; }
-        public Lenguaje Lenguaje { get; set; }
-        public List<Lenguaje> Lenguajes { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {       if (ClienteId < 1)
-            {
-                yield return new ValidationResult(
-                    errorMessage: "selecciones cliente",
-                    memberNames: new[] { "ClienteId" }
-               );
-            }
-            if (FechaFin < FechaInicio)
-            {
-                yield return new ValidationResult(
-                    errorMessage: "EndDate must be greater than StartDate",
-                    memberNames: new[] { "FechaFin", "FechaInicio" }
-               );
-            }
+        //[NotMapped]
+        //public int LenguajesPorProyectoId { get; set; }
+        //[NotMapped]
+        //public LenguajesPorProyecto LenguajesPorProyecto { get; set; }
+        public List<LenguajesPorProyecto> LenguajesPorProyectos { get; set; }
 
-     
-        }
+
     }
 }

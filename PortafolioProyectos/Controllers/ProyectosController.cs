@@ -34,7 +34,7 @@ namespace PortafolioProyectos.Controllers
             //ViewData["LenguajeId"] = _context.Lenguajes;
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido");
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion");
-            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion");
+            //ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion");
             return View();
         }
 
@@ -53,7 +53,7 @@ namespace PortafolioProyectos.Controllers
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", proyecto.ClienteId);
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", proyecto.EstadoId);
-            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion", proyecto.LenguajeId);
+            //ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion", proyecto.LenguajeId);
             return View(proyecto);
         }
 
