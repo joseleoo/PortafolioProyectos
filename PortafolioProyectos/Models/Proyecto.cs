@@ -40,7 +40,7 @@ namespace PortafolioProyectos.Models
         //public int LenguajesPorProyectoId { get; set; }
         //[NotMapped]
         //public LenguajesPorProyecto LenguajesPorProyecto { get; set; }
-        public List<LenguajesPorProyecto> LenguajesPorProyectos { get; set; }
+
 
 
     }

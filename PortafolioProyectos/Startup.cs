@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PortafolioProyectos.Context;
+using Thinktecture;
 
 namespace PortafolioProyectos
 {
@@ -27,6 +28,12 @@ namespace PortafolioProyectos
         {
             services.AddDbContext<PortafolioDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<PortafolioDbContext>(builder => builder
+      .UseSqlServer("DefaultConnection", sqlOptions =>
+      {
+          sqlOptions.AddRowNumberSupport();
+      }));
             services.AddControllers()
               .AddNewtonsoftJson(options =>
               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

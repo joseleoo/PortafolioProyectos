@@ -22,7 +22,7 @@ namespace PortafolioProyectos.Controllers
         // GET: Proyectos
         public async Task<IActionResult> Index()
         {
-            var portafolioDbContext = _context.Proyectos.Include(p => p.Cliente).Include(p => p.Estado).Include(p => p.Lenguaje);
+            var portafolioDbContext = _context.Proyectos.Include(p => p.Cliente).Include(p => p.Estado);
             return View(await portafolioDbContext.ToListAsync());
         }
 
@@ -53,7 +53,6 @@ namespace PortafolioProyectos.Controllers
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", proyecto.ClienteId);
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", proyecto.EstadoId);
-            //ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion", proyecto.LenguajeId);
             return View(proyecto);
         }
 
@@ -68,7 +67,6 @@ namespace PortafolioProyectos.Controllers
             var proyecto = await _context.Proyectos
                 .Include(p => p.Cliente)
                 .Include(p => p.Estado)
-                .Include(p => p.Lenguaje)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proyecto == null)
             {
@@ -93,7 +91,6 @@ namespace PortafolioProyectos.Controllers
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", proyecto.ClienteId);
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", proyecto.EstadoId);
-            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Descripcion", proyecto.LenguajeId);
             return View(proyecto);
         }
 
@@ -131,7 +128,6 @@ namespace PortafolioProyectos.Controllers
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Apellido", proyecto.ClienteId);
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Id", proyecto.EstadoId);
-            ViewData["LenguajeId"] = new SelectList(_context.Lenguajes, "Id", "Id", proyecto.LenguajeId);
             return View(proyecto);
         }
 
@@ -146,7 +142,6 @@ namespace PortafolioProyectos.Controllers
             var proyecto = await _context.Proyectos
                 .Include(p => p.Cliente)
                 .Include(p => p.Estado)
-                .Include(p => p.Lenguaje)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proyecto == null)
             {

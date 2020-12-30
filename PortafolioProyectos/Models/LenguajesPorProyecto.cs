@@ -12,7 +12,9 @@ namespace PortafolioProyectos.Models
         public int ProyectoId { get; set; }
         public Proyecto Proyecto { get; set; }
 
-        public List<LenguajesPorProyecto> LenguajesPorProyectos{ get; set; }
+        [StringLength(1)]
+        public char Nivel { get; set; }
+
 
     }
 }

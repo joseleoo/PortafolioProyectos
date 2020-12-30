@@ -10,8 +10,8 @@ using PortafolioProyectos.Context;
 namespace PortafolioProyectos.Migrations
 {
     [DbContext(typeof(PortafolioDbContext))]
-    [Migration("20201223122941_initial5")]
-    partial class initial5
+    [Migration("20201230014134_seed")]
+    partial class seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,32 @@ namespace PortafolioProyectos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Apellido = "Quiñones",
+                            Email = "desarrollojlq@aoutlook.es",
+                            Nombre = "Jose Leonardo",
+                            Telefono = "316 898 2961"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Apellido = "Losada",
+                            Email = "slosada6@misena.edu.co",
+                            Nombre = "Saidy",
+                            Telefono = "316 000 2961"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Apellido = "Pajaro",
+                            Email = "pajaro@misena.edu.co",
+                            Nombre = "Juan Carlos",
+                            Telefono = "000 898 2961"
+                        });
                 });
 
             modelBuilder.Entity("PortafolioProyectos.Models.Estado", b =>
@@ -79,19 +105,32 @@ namespace PortafolioProyectos.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Lenguajes");
+                });
+
+            modelBuilder.Entity("PortafolioProyectos.Models.LenguajesPorProyecto", b =>
+                {
+                    b.Property<int>("LenguajeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProyectoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nivel")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)")
                         .HasMaxLength(1);
 
-                    b.Property<int?>("ProyectoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("LenguajeId", "ProyectoId");
 
                     b.HasIndex("ProyectoId");
 
-                    b.ToTable("Lenguajes");
+                    b.ToTable("LenguajesPorProyectos");
                 });
 
             modelBuilder.Entity("PortafolioProyectos.Models.Proyecto", b =>
@@ -121,9 +160,6 @@ namespace PortafolioProyectos.Migrations
                     b.Property<int>("Horas")
                         .HasColumnType("int");
 
-                    b.Property<int>("LenguajeId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Precio")
                         .HasColumnType("float");
 
@@ -133,16 +169,22 @@ namespace PortafolioProyectos.Migrations
 
                     b.HasIndex("EstadoId");
 
-                    b.HasIndex("LenguajeId");
-
                     b.ToTable("Proyectos");
                 });
 
-            modelBuilder.Entity("PortafolioProyectos.Models.Lenguaje", b =>
+            modelBuilder.Entity("PortafolioProyectos.Models.LenguajesPorProyecto", b =>
                 {
-                    b.HasOne("PortafolioProyectos.Models.Proyecto", null)
-                        .WithMany("Lenguajes")
-                        .HasForeignKey("ProyectoId");
+                    b.HasOne("PortafolioProyectos.Models.Lenguaje", "Lenguaje")
+                        .WithMany()
+                        .HasForeignKey("LenguajeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PortafolioProyectos.Models.Proyecto", "Proyecto")
+                        .WithMany()
+                        .HasForeignKey("ProyectoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PortafolioProyectos.Models.Proyecto", b =>
@@ -156,12 +198,6 @@ namespace PortafolioProyectos.Migrations
                     b.HasOne("PortafolioProyectos.Models.Estado", "Estado")
                         .WithMany()
                         .HasForeignKey("EstadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PortafolioProyectos.Models.Lenguaje", "Lenguaje")
-                        .WithMany()
-                        .HasForeignKey("LenguajeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

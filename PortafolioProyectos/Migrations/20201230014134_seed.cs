@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PortafolioProyectos.Migrations
 {
-    public partial class initial5 : Migration
+    public partial class seed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,19 @@ namespace PortafolioProyectos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Lenguajes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion = table.Column<string>(maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lenguajes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Proyectos",
                 columns: table => new
                 {
@@ -48,8 +61,7 @@ namespace PortafolioProyectos.Migrations
                     FechaFin = table.Column<DateTime>(nullable: false),
                     Precio = table.Column<double>(nullable: false),
                     Horas = table.Column<int>(nullable: false),
-                    EstadoId = table.Column<int>(nullable: false),
-                    LenguajeId = table.Column<int>(nullable: false)
+                    EstadoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,29 +81,49 @@ namespace PortafolioProyectos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lenguajes",
+                name: "LenguajesPorProyectos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripcion = table.Column<string>(maxLength: 100, nullable: true),
-                    Nivel = table.Column<string>(maxLength: 1, nullable: false),
-                    ProyectoId = table.Column<int>(nullable: true)
+                    LenguajeId = table.Column<int>(nullable: false),
+                    ProyectoId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Nivel = table.Column<string>(maxLength: 1, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lenguajes", x => x.Id);
+                    table.PrimaryKey("PK_LenguajesPorProyectos", x => new { x.LenguajeId, x.ProyectoId });
                     table.ForeignKey(
-                        name: "FK_Lenguajes_Proyectos_ProyectoId",
+                        name: "FK_LenguajesPorProyectos_Lenguajes_LenguajeId",
+                        column: x => x.LenguajeId,
+                        principalTable: "Lenguajes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LenguajesPorProyectos_Proyectos_ProyectoId",
                         column: x => x.ProyectoId,
                         principalTable: "Proyectos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "Id", "Apellido", "Email", "Nombre", "Telefono" },
+                values: new object[] { 1, "Quiñones", "desarrollojlq@aoutlook.es", "Jose Leonardo", "316 898 2961" });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "Id", "Apellido", "Email", "Nombre", "Telefono" },
+                values: new object[] { 2, "Losada", "slosada6@misena.edu.co", "Saidy", "316 000 2961" });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "Id", "Apellido", "Email", "Nombre", "Telefono" },
+                values: new object[] { 3, "Pajaro", "pajaro@misena.edu.co", "Juan Carlos", "000 898 2961" });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Lenguajes_ProyectoId",
-                table: "Lenguajes",
+                name: "IX_LenguajesPorProyectos_ProyectoId",
+                table: "LenguajesPorProyectos",
                 column: "ProyectoId");
 
             migrationBuilder.CreateIndex(
@@ -103,26 +135,15 @@ namespace PortafolioProyectos.Migrations
                 name: "IX_Proyectos_EstadoId",
                 table: "Proyectos",
                 column: "EstadoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Proyectos_LenguajeId",
-                table: "Proyectos",
-                column: "LenguajeId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Proyectos_Lenguajes_LenguajeId",
-                table: "Proyectos",
-                column: "LenguajeId",
-                principalTable: "Lenguajes",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Lenguajes_Proyectos_ProyectoId",
-                table: "Lenguajes");
+            migrationBuilder.DropTable(
+                name: "LenguajesPorProyectos");
+
+            migrationBuilder.DropTable(
+                name: "Lenguajes");
 
             migrationBuilder.DropTable(
                 name: "Proyectos");
@@ -132,9 +153,6 @@ namespace PortafolioProyectos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Estados");
-
-            migrationBuilder.DropTable(
-                name: "Lenguajes");
         }
     }
 }
