@@ -25,7 +25,7 @@ namespace PortafolioProyectos.Context
         {
             modelBuilder.Entity<LenguajesPorProyecto>()
                 .HasKey(lp => new { lp.LenguajeId, lp.ProyectoId });
-            
+
             base.OnModelCreating(modelBuilder);
             //Random rnd = new Random();
             //int cantRandom = rnd.Next(10, 20);
@@ -36,8 +36,21 @@ namespace PortafolioProyectos.Context
             new Cliente { Id=3,Nombre="Juan Carlos",Apellido="Pajaro",Email="pajaro@misena.edu.co",Telefono="000 898 2961"},
 
             };
+            var estados = new List<Estado> {
+                new Estado{ Id=1,Descripcion="EN NEGOCIACION"} ,
+                new Estado{ Id=2,Descripcion="EN PROCESO"} ,
+                new Estado{ Id=3,Descripcion="TERMINADO"} ,
+                new Estado{ Id=4,Descripcion="aNULADO"}
+            };
 
+            var proyectos = new List<Proyecto> {
+                new Proyecto{Id=1,Descripcion="Leon Software",ClienteId=1,EstadoId=1,FechaInicio=DateTime.Now,FechaFin=DateTime.Now.AddDays(20),Horas=40,Precio=200000},
+                new Proyecto{Id=2,Descripcion="Riesgos",ClienteId=2,EstadoId=2,FechaInicio=DateTime.Now,FechaFin=DateTime.Now.AddDays(10),Horas=35,Precio=205000}
+            };
+
+            modelBuilder.Entity<Estado>().HasData(estados.ToArray());
             modelBuilder.Entity<Cliente>().HasData(clientes.ToArray());
+            modelBuilder.Entity<Proyecto>().HasData(proyectos.ToArray());
 
         }
 

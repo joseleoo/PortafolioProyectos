@@ -28,6 +28,9 @@ namespace PortafolioProyectos
         {
             services.AddDbContext<PortafolioDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+          //  services.AddDbContext<PortafolioDbContext>(
+          //options => options.UseInMemoryDatabase(databaseName: "testDB")
+      //);
 
             services.AddDbContext<PortafolioDbContext>(builder => builder
       .UseSqlServer("DefaultConnection", sqlOptions =>
